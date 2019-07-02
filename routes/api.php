@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\Request;
 
 /*
@@ -19,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('actor', 'ApiController@index');
 
-
+Route::post('/register', 'PassportController@register');
+Route::post('/login', 'PassportController@login');

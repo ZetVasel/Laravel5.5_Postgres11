@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('/new', 'NewController@index')->name('new');
 
-Route::get('/actor', 'ApiController@index')->name('actor');
+Route::get('/', 'ApiController@index')->name('actor');
+
+Route::get('/register', 'PassportController@register')->name('register');
+Route::get('/login', 'PassportController@login')->name('login');
+
