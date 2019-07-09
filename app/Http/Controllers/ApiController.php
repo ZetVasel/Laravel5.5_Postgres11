@@ -37,9 +37,17 @@ class ApiController extends Controller
                 ->paginate($limit);
         }
 
+        $count = DB::table('film_actor')
+            ->join('actor', 'film_actor.actor_id', '=', 'actor.actor_id')
+            ->join('film', 'film_actor.film_id', '=', 'film.film_id')
+            ->join('category', 'film_actor.actor_id', '=', 'category.category_id')
+            ->join('film_category', 'film_actor.actor_id', '=', 'film_category.category_id')
+            ->select('film_actor.*', 'actor.first_name', 'actor.last_name', 'film.title', 'category.name')
+            ->where(['actor.actor_id' => 'film_category.category_id'])->count();
+
 
         //return ActorResource::collection($one); // for postman testing
-        return view('actor', compact('one'));
+        return view('actor', compact('one', 'count'));
     }
 
     /**
